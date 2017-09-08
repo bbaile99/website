@@ -123,13 +123,8 @@ $(document).ready(function () {
 <div id="filtering-columns-and-rows" class="section level2">
 <h2>Filtering Columns and Rows</h2>
 <p>With SQL, you can filter columns and rows by using SELECT and WHERE. Let’s look at an example using the Lahman database. So we should first load that database, along with the package sqldf.</p>
-<pre class="r"><code>library(Lahman)</code></pre>
-<pre><code>## Warning: package 'Lahman' was built under R version 3.4.1</code></pre>
-<pre class="r"><code>library(sqldf)</code></pre>
-<pre><code>## Warning: package 'sqldf' was built under R version 3.4.1</code></pre>
-<pre><code>## Warning: package 'gsubfn' was built under R version 3.4.1</code></pre>
-<pre><code>## Warning: package 'proto' was built under R version 3.4.1</code></pre>
-<pre><code>## Warning: package 'RSQLite' was built under R version 3.4.1</code></pre>
+<pre class="r"><code>library(Lahman)
+library(sqldf)</code></pre>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID, yearID, teamID, HR FROM Batting WHERE teamID='NYA'and yearID=1927&quot;
 sqldf(query)</code></pre>
 <pre><code>##     playerID yearID teamID HR

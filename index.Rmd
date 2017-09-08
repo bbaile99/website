@@ -5,7 +5,7 @@ output: html_document
 
 ## Filtering Columns and Rows
 With SQL, you can filter columns and rows by using SELECT and WHERE. Let's look at an example using the Lahman database. So we should first load that database, along with the package sqldf.
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 library(Lahman)
 library(sqldf)
 ```
