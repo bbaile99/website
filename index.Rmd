@@ -18,7 +18,10 @@ sqldf(query)
 
 ## ORDER BY
 
-with SQL, you can order the rows of your output. For instance, suppose you want to see every instance of a player hitting more than 50 homeruns. But you would like the players with the most homeruns to be at the top. We could do the following:
+with SQL, you can order the rows of your output. 
+
+Example 1
+For instance, suppose you want to see every instance of a player hitting more than 50 homeruns. But you would like the players with the most homeruns to be at the top. We could do the following:
 
 ```{r}
 query<-"SELECT playerID, teamID, yearID, HR FROM Batting
@@ -28,5 +31,52 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 
+Example 2
+Find all instances of a player striking out less than 10 times. Make sure each player has at least 400 AB. Order by least to most SO.
+```{r}
+query<-"SELECT playerID, teamID, yearID, SO, AB FROM Batting
+WHERE AB>=400 and SO<10
+ORDER BY SO"
 
+sqldf(query)
+```
+
+##Aggregation
+
+
+
+Example 1
+Find the career homerun total for Babe Ruth
+
+```{r}
+query<-"SELECT playerID, sum(HR) FROM Batting
+WHERE playerID='ruthba01'
+GROUP BY playerID"
+
+sqldf(query)
+```
+
+Example 2
+Find career HR totals for all players but list only those with a total of 600 or more in descending order.
+
+```{r}
+query<-"SELECT playerID, sum(HR) FROM Batting
+GROUP BY playerID
+HAVING sum(HR)>=600
+ORDER BY sum(HR) DESC"
+
+sqldf(query)
+```
+
+Example 3
+What players have the highest average per season HR totals? List only those with averages greater than 30 and order them by highest to lowest.
+
+```{r}
+query<-"SELECT playerID, avg(HR) FROM Batting
+GROUP BY playerID
+HAVING avg(HR)>30
+ORDER BY avg(HR) DESC"
+
+sqldf(query)
+```
 
