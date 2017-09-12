@@ -10,15 +10,46 @@ library(Lahman)
 library(sqldf)
 ```
 
+Example 1
+Homerun totals of the 1927 Yankees.
 ```{r}
 query<-"SELECT playerID, yearID, teamID, HR FROM Batting WHERE teamID='NYA'and yearID=1927"
 sqldf(query)
 
 ```
 
+Example 2
+Every Yankee with 40 or more homeruns.
+```{r}
+query<-"SELECT playerID, teamID, yearID, HR FROM Batting
+WHERE teamID='NYA' and HR>=40"
+
+sqldf(query)
+```
+
+Example 3
+Find every instance where a player had more than 40 HR but less than 60 SO.
+```{r}
+query<-"SELECT playerID, teamID, yearID, SO, HR FROM Batting
+WHERE HR>40 and SO<60"
+
+sqldf(query)
+```
+
+Example 4
+Find all instances of Phillies in the 1970s hitting more than 30 HR. 
+
+```{r}
+query<-"SELECT playerID, teamID, yearID, HR FROM Batting
+WHERE teamID='PHI' and yearID>=1970 and yearID<1980 and HR>30"
+
+sqldf(query)
+```
+
+
 ## ORDER BY
 
-with SQL, you can order the rows of your output. 
+With SQL, you can order the rows of your output with the 'ORDER BY' command.
 
 Example 1
 For instance, suppose you want to see every instance of a player hitting more than 50 homeruns. But you would like the players with the most homeruns to be at the top. We could do the following:
@@ -43,7 +74,12 @@ sqldf(query)
 
 ##Aggregation
 
+With SQL, you can further refine information by using the command 'GROUP BY.' For further filtering, you can use the command 'HAVING,' which functions the same as the 'WHERE' command. To change the order in which the information appears, you can use the 'ORDER BY' command and by adding 'DESC,' the information will appear in descending order.
 
+sum(column name) = summation
+avg(column name) = average
+max(column name) = maximum
+min(column name) = minimum
 
 Example 1
 Find the career homerun total for Babe Ruth
