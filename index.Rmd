@@ -116,3 +116,39 @@ ORDER BY avg(HR) DESC"
 sqldf(query)
 ```
 
+##Joins
+
+Example 1
+First and Last names,along with teamID, yearID, HR, player should be Babe Ruth
+
+```{r}
+query<-"SELECT nameFirst,nameLast,teamID,yearID,HR FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+WHERE Batting.playerID='ruthba01'"
+
+sqldf(query)
+```
+
+Example 2
+Find all instances of players hitting more than 50 HR. Include first and last names, team name, year, and homeruns.
+
+```{r}
+query<-"SELECT nameFirst,nameLast,yearID,teamID,HR FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+WHERE HR>50
+ORDER BY HR DESC"
+
+sqldf(query)
+```
+
+Example 3
+Babe Ruth with playerID, team name, yearID, HR
+
+```{r}
+query<-"SELECT playerID,name,Batting.yearID,Batting.HR FROM Batting INNER JOIN Teams
+ON Batting.teamID=Teams.teamID and Batting.yearID=Teams.yearID
+WHERE playerID='ruthba01'"
+
+sqldf(query)
+```
+
