@@ -152,3 +152,45 @@ WHERE playerID='ruthba01'"
 sqldf(query)
 ```
 
+Example 4
+Babe Ruth
+playerID,teamID,yearID,HR
+first and last name,name
+
+```{r}
+query<-"SELECT nameFirst,nameLast,name,Batting.yearID,Batting.HR FROM (Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID) INNER JOIN Teams
+ON Batting.teamID=Teams.teamID AND Batting.yearID=Teams.yearID
+WHERE Batting.playerID='ruthba01'"
+
+sqldf(query)
+```
+
+Example 5
+Let's get the career homerun totals for players. Limit the display to just those that hit at least 600 HR. 
+
+```{r}
+query<-"SELECT nameFirst,nameLast,sum(HR) FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+GROUP BY Batting.playerID
+HAVING sum(HR)>=600
+ORDER BY sum(HR) DESC"
+
+sqldf(query)
+```
+
+
+Example 6
+List all players with first name BOB who averaged more than one million dollars in salary over their career. Include last names
+
+```{r}
+query<-"SELECT nameFirst,nameLast,avg(salary)
+FROM Salaries INNER JOIN Master
+ON Salaries.playerID=Master.playerID
+WHERE nameFirst='Bob'
+GROUP BY salaries.playerID
+HAVING avg(salary)>1000000
+ORDER BY avg(salary) DESC"
+
+sqldf(query)
+```
