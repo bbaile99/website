@@ -118,6 +118,8 @@ sqldf(query)
 
 ##Joins
 
+With SQL, you can combine tables together to provide a larger table of available information. In order to create this table, you use the command "INNER JOIN" and then the command "ON" to let the tables know how to connect to one another. After combining the tables, you must check the query and confirm that there is no overlapping information. If there is, you must specify which table you would like the data pulled from. 
+
 Example 1
 First and Last names,along with teamID, yearID, HR, player should be Babe Ruth
 
